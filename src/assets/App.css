@@ -1,0 +1,73 @@
+body{
+  padding: 0;
+  margin: 0;
+  font-family: Tahoma;
+}
+
+.app-logo {
+  animation: app-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.app-header {
+  text-align: center;
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+@keyframes app-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+.content-box{
+  display: flex;
+  flex-direction: row;
+}
+
+.menu{
+  flex: 0 0 200px;
+  margin-right:10px;
+}
+.menu ul{
+  padding: 10px 20px 0 0; margin:0;
+  list-style-type: none;
+}
+.menu li a, .menu li a:visited{
+  line-height: 25px;
+  text-decoration: none;
+  padding: 5px 20px;
+
+  display: inline-block;
+  box-sizing: border-box;
+  color: #222;
+  width: 100%;
+}
+.menu li a.active, .menu li a.active:visited{
+  background: #89F18B;
+}
+.content{
+  flex: 0 0 780px;
+  min-height: 720px;
+  margin:10px;
+}
+.footer{
+  border-top: 2px solid #444;
+  padding: 2px 2px;
+}
+
+.app{
+  width: 1100px;
+  margin: auto;
+  color: #222;
+}
+
+ul li{
+  line-height: 25px;
+}
+p{
+  line-height: 20px;
+}
