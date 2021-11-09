@@ -1,19 +1,21 @@
-Webix-React demo
+Webix-React demo with Jet-based Complex Widget
 ================
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+This repo contains examples specifically for importing Webix [Complex Widgets](https://webix.com/widget/complex-widgets/) into a React App.
+By default, the demo shows how to initialize the [**File Manager**](https://webix.com/filemanager/), but it can be replaced with any of Webix widgets. 
 
-You can use Webix inside of React App, to add some rich widgets to the existing functionality.
+The example is based on the [default demo from Webix Github](https://github.com/webix-hub/react-demo). 
+The general idea of integration is described in the related [README section](https://github.com/webix-hub/react-demo#creating-custom-webix-react-component) of this package.
+Webpack configuration and basic dependencies in package.json is the default outcome of the `yarn eject` command. The initial project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-If you plan to use Webix for most UI in the app, please check [Webix Jet](https://webix.gitbooks.io/webix-jet/content/chapter1.html) first. It is a micro-framework for building Webix-based apps. 
+By default, Webix and File Manager will be fetched from npm, so make sure you have signed in to our [private @xbs scope](https://docs.webix.com/desktop__install.html#installingwithnpm). 
+**Note**: NPM always provides access to the latest versions of packages, so credentials are valid only while the license is active.
 
 How to Start
 ----------------
 
-[Grab the demo from Github](https://github.com/webix-hub/react-demo) if you haven't done this yet. 
-Thus you will get an example of integration usage.
-
-Run `npm install` and `npm start` after that. Open `http://localhost:3000` to view the demo in the browser.
+Run `npm install` and `npm start`. 
+Open `http://localhost:3000` to view the demo in the browser.
 
 The page will be reloading while you are editing form fields.
 
@@ -23,87 +25,55 @@ To build the production version, run `npm run build`.
 
 It will build the application for production to the *build* folder. After that your app is ready to be deployed.
 
+How to import and use a Complex Widget
+-------
+### Option 1: Global import (see the [main](https://github.com/HelgaListopad/webix-react-complex-widgets/tree/main) branch)
 
-Using Webix Widget in React App
--------------------------------
+The minimum requirements to init the File Manager in a React app are
+- have a global Webix object  (it should be available before the component's sources are imported),
+- import the FM module as `import * as fileManager from "@xbs/filemanager"`.
 
-You can create a React component with a Webix widget inside like this:
+A basic solution is to manually assign webix to a global variable, then use webix.ui() to init File Manager: 
 
-~~~js
-const ui = {
-	view:"slider"
-};
-const value = 123;
-
-const SliderView = () => (
-  <Webix ui={ui} data={value} />
-)
-~~~
-
-The logic is the following:
-
-- use the tag  < Webix > to define a Webix widget
-- specify the necessary view in the *ui* object and define its config
-
-Creating Custom Webix-React Component
---------------------------------
-
-Instead of using a prebuilt Webix component, there is a possibility to make a custom one.
-For example, the code for a custom Slider component can look as follows: 
-
-~~~js
-class SliderView extends Component {
-  render() {
-    return (
-      <div ref="root"></div>
-    );
-  }
-
-  componentDidMount(){
-    this.ui = webix.ui({
-      view:"slider"
-      container:ReactDOM.findDOMNode(this.refs.root)
-    });
-  }
-
-  componentWillUnmount(){
-    this.ui.destructor();
-    this.ui = null;
-  }
-
-  shouldComponentUpdate(){
-    return false;
-  }
+```js
+componentDidMount() {
+   window.webix = webix;
+   webix.ready(() => {
+      require("@xbs/filemanager")
+      webix.ui({ view:"filemanager" });
+   })
 }
-~~~
+```
 
-In the above code we have created the SliderView component that contains a Webix slider inside.
+### Option 2: ProvidePlugin (see the [demo-provideplugin](https://github.com/HelgaListopad/webix-react-complex-widgets/tree/demo-provideplugin) branch)
 
-The list of the defined methods is:
+Another option is to use [ProvidePlugin](https://webpack.js.org/plugins/provide-plugin/) for Webix and initialize File Manager [as an application](https://docs.webix.com/filemanager__creating_filemanager.html) (this is required for correct init).
 
-- the **componentDidMount()** method creates a new component
-- the **componentWillUnmount()** method will destruct the component when it won't be needed anymore
-- the **shouldComponentUpdate()** method is responsible for the component's updates. In this example, updates for the component are disabled
+```js
+componentDidMount(){
+   webix.ready(() => {
+      const fManager = require("@xbs/filemanager");
 
-Using Webix Widget with Redux
--------------------------------
-
-You can use a Webix widget with Redux without any extra customization required.
-
-For custom components make sure that such a component returns *true* from **shouldComponentUpdate()** and provides
-the **componentWillUpdate** handler to mutate the state of the Webix widget.
-
-~~~js
-componentWillUpdate(props){
-    if (props.data)
-      this.setWebixData(props.data);
-    if (props.select)
-      this.select(props.select);
-},
-shouldComponentUpdate(){
-	return true;
+      this.app = new fManager.App({ webix, url: "https://docs.webix.com/filemanager-backend/" })
+      this.app.render( document.body );
+   })
 }
-~~~
+```
+In Webpack configuration, add 
+```js
+new webpack.ProvidePlugin({
+   webix: "@xbs/webix-pro",
+}),
+```
+So that the webix will be available in all modules.
+
+If you use ESLint with the [`no-undef`](https://eslint.org/docs/rules/no-undef) rule, you'll also need to extend these settings with the [following statement](https://eslint.org/docs/user-guide/configuring#specifying-globals), as `ProvidePlugin` allows to refer to a global value without importing/defining Webix in a module.
+```
+"globals": {
+   "webix": "readonly"
+}
+```
+
 License
 --------
 
