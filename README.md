@@ -1,23 +1,21 @@
 Webix-React demo with a Jet-based Complex Widget
 ================
 
-This repo contains examples of importing Webix [Complex Widgets](https://webix.com/widget/complex-widgets/) into a React App.
-
+This repo contains examples of importing Webix [Complex Widgets](https://webix.com/widget/complex-widgets/) into a React App.<br/>
 By default, the demo shows how to initialize the [**File Manager**](https://webix.com/filemanager/), but it can be replaced with any of Webix Complex Widgets. 
 
-The example is based on the [default demo from Webix Github](https://github.com/webix-hub/react-demo). 
-
+The example is based on the [default demo from Webix Github](https://github.com/webix-hub/react-demo). <br/>
 The general idea of integration is described in the related [README section](https://github.com/webix-hub/react-demo#creating-custom-webix-react-component) of this package.
 
 Webpack configuration and basic dependencies in package.json is the default outcome of the `yarn eject` command. The initial project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-By default, Webix and File Manager will be fetched from npm, so make sure you have signed in to our [private @xbs scope](https://docs.webix.com/desktop__install.html#installingwithnpm). 
+By default, Webix and File Manager will be fetched from npm, so make sure you have signed in to our [private @xbs scope](https://docs.webix.com/desktop__install.html#installingwithnpm). <br/>
 **Note**: NPM always provides access to the latest versions of packages, so credentials are valid only while the license is active.
 
 How to Start
 ----------------
 
-Run `npm install` and `npm start`. 
+Run `npm install` and `npm start`. <br/>
 Open `http://localhost:3000` to view the demo in the browser.
 
 The page will be reloading while you are editing form fields.
@@ -33,7 +31,7 @@ How to import and use a Complex Widget
 ### Option 1: Global import (see the [main](https://github.com/HelgaListopad/webix-react-complex-widgets/tree/main) branch)
 
 The minimum requirements to init the File Manager in a React app are
-- have a global Webix object  (it should be available before the component's sources are imported),
+- have a global Webix object  (it should be available *before* the component's sources are imported),
 - import the FM module as `import * as fileManager from "@xbs/filemanager"`.
 
 A basic solution is to manually assign webix to a global variable, then use webix.ui() to init File Manager: 
