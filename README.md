@@ -9,6 +9,7 @@ The general idea of integration is described in the related [README section](htt
 
 Webpack configuration and basic dependencies in package.json is the default outcome of the `yarn eject` command. The initial project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+Complex widgets are PRO components.<br/>
 By default, Webix and File Manager will be fetched from npm, so make sure you have signed in to our [private @xbs scope](https://docs.webix.com/desktop__install.html#installingwithnpm). <br/>
 **Note**: NPM always provides access to the latest versions of packages, so credentials are valid only while the license is active.
 
