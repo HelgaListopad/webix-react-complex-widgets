@@ -1,11 +1,14 @@
-Webix-React demo with Jet-based Complex Widget
+Webix-React demo with a Jet-based Complex Widget
 ================
 
-This repo contains examples specifically for importing Webix [Complex Widgets](https://webix.com/widget/complex-widgets/) into a React App.
-By default, the demo shows how to initialize the [**File Manager**](https://webix.com/filemanager/), but it can be replaced with any of Webix widgets. 
+This repo contains examples of importing Webix [Complex Widgets](https://webix.com/widget/complex-widgets/) into a React App.
+
+By default, the demo shows how to initialize the [**File Manager**](https://webix.com/filemanager/), but it can be replaced with any of Webix Complex Widgets. 
 
 The example is based on the [default demo from Webix Github](https://github.com/webix-hub/react-demo). 
+
 The general idea of integration is described in the related [README section](https://github.com/webix-hub/react-demo#creating-custom-webix-react-component) of this package.
+
 Webpack configuration and basic dependencies in package.json is the default outcome of the `yarn eject` command. The initial project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 By default, Webix and File Manager will be fetched from npm, so make sure you have signed in to our [private @xbs scope](https://docs.webix.com/desktop__install.html#installingwithnpm). 
