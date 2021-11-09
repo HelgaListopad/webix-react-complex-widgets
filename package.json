@@ -141,6 +141,9 @@
     ]
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "globals": {
+      "webix": "readonly"
+    }
   }
 }

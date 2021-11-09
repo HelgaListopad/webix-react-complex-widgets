@@ -3,20 +3,16 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import * as webix from '@xbs/webix-pro';
 
 import '@xbs/webix-pro/webix.css';
 import '@xbs/filemanager/codebase/filemanager.css';
-
-// hardcode global value
-window.webix = webix;
 
 class FilesView extends Component {
   constructor(props) {
     super(props);
     this.uiContainer = React.createRef();
   }
-  
+
   render() {
     return (
       <div ref={this.uiContainer} style={{height:"100%"}}></div>
@@ -31,22 +27,19 @@ class FilesView extends Component {
         webix.CustomScroll.init();
       }
 
-      require("@xbs/filemanager");
+      const fManager = require("@xbs/filemanager");
 
-      this.ui = webix.ui({ 
-        view: "filemanager",
-        url: "https://docs.webix.com/filemanager-backend/",
-        container: ReactDOM.findDOMNode(this.uiContainer.current)
-      });
+      this.app = new fManager.App({ webix, url: "https://docs.webix.com/filemanager-backend/" })
+      this.app.render( ReactDOM.findDOMNode(this.uiContainer.current) );
 
     })
 
   }
 
   componentWillUnmount(){
-    if (this.ui){
-      this.ui.destructor();
-      this.ui = null;
+    if (this.app){
+      this.app.destructor();
+      this.app = null;
     }
   }
 
