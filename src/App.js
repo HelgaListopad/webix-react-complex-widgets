@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route, NavLink} from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, NavLink} from 'react-router-dom';
 
 import Home from './Home';
 import FilesView from './FilesView';
@@ -17,13 +17,15 @@ const App = () => (
       <div className='content-box'>
         <div className='menu'>
           <ul>
-            <li><NavLink to="/" exact   activeClassName='active'>Home</NavLink></li>
-            <li><NavLink to="/files"   activeClassName='active'>File Manager</NavLink></li>
+            <li><NavLink to="/" exact="true" className={({ isActive }) => isActive ? 'active' : undefined }  >Home</NavLink></li>
+            <li><NavLink to="/files"   className={({ isActive }) => isActive ? 'active' : undefined }>File Manager</NavLink></li>
           </ul>
         </div>
         <div className='content'>
-          <Route exact path="/" component={Home} />
-          <Route path="/files" component={FilesView} />
+          <Routes>
+            <Route exact="true" path="/" element={<Home/>} />
+            <Route path="/files" element={<FilesView/>} />
+          </Routes>
         </div>
       </div>
       <div className='footer'>
