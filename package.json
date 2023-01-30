@@ -6,6 +6,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^6.5.1",
     "@xbs/filemanager": "^10.0.5",
+    "@xbs/spreadsheet": "^10.0.5",
     "@xbs/webix-pro": "^10.0.5",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
@@ -127,7 +128,10 @@
     ]
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "globals": {
+      "webix": "readonly"
+    }
   },
   "homepage": "."
 }

@@ -4,10 +4,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-import '@xbs/webix-pro/webix.css';
-import "@xbs/filemanager/codebase/filemanager.css";
+import "@xbs/webix-pro/webix.css";
+import "@xbs/spreadsheet/spreadsheet.css";
 
-class FilesView extends Component {
+class SheetsView extends Component {
 	constructor(props) {
 		super(props);
 		this.uiContainer = React.createRef();
@@ -18,14 +18,14 @@ class FilesView extends Component {
 	}
 
 	componentDidMount() {
-    const container = ReactDOM.findDOMNode(this.uiContainer.current);
+		const container = ReactDOM.findDOMNode(this.uiContainer.current);
 
 		webix.ready(() => {
-			require("@xbs/filemanager");
+			require("@xbs/spreadsheet");
 
 			this.ui = webix.ui({
-				view: "filemanager",
-				url: "https://docs.webix.com/filemanager-backend/",
+				view: "spreadsheet",
+				toolbar: "full",
 				container,
 			});
 		});
@@ -50,4 +50,4 @@ class FilesView extends Component {
 	}
 }
 
-export default FilesView;
+export default SheetsView;
